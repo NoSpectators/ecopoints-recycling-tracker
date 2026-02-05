@@ -7,7 +7,7 @@ import java.util.List;
  * Represents a household participating in the Eco-Points program
  */
 
-public class HouseHold implements Serializable {
+public class Household implements Serializable {
     private String id;
     private String name;
     private String address;
@@ -15,7 +15,7 @@ public class HouseHold implements Serializable {
     private List<RecyclingEvent> events;
     private double totalPoints;
 
-    public HouseHold(String id, String name, String address) {
+    public Household(String id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;

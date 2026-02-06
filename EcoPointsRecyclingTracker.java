@@ -20,37 +20,23 @@ public class EcoPointsRecyclingTracker {
             System.out.println("3. Display Households");
             System.out.println("4. Display Household Recycling Events");
             System.out.println("5. Generate Reports");
-            System.out.println("6. Save to File");
-            System.out.println("7. Exit");
+            System.out.println("6. Save and Exit");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
+            // the -> syntax automaticallys inserts "break" statement after calling function
             switch (choice) {
-                case "1":
-                    registerHousehold();
-                    break;
-                case "2":
-                    logRecyclingEvent();
-                    break;
-                case "3":
-                    displayHouseholds();
-                    break;
-                case "4":
-                    displayHouseholdEvents();
-                    break;
-                case "5":
-                    generateReports();
-                    break;
-                case "6":
+                case "1" -> registerHousehold();
+                case "2" -> logRecyclingEvent();
+                case "3" -> displayHouseholds();
+                case "4" -> displayHouseholdEvents();
+                case "5" -> generateReports();
+                case "6" -> {
                     saveHouseholdsToFile();
-                    System.out.println("Data saved.");
-                    break;
-                case "7":
-                    System.out.println("Exiting program. Goodbye!");
                     running = false;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please select 1 - 6.");
+                    System.out.println("Data saved. Goodbye!");
+                }
+                default -> System.out.println("Invalid choice. Please select 1 - 6.");
             }
         }
     }

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 /**
  * Represents a single recycling event for a household
  */
-public class RecyclingEvent {
+public class RecyclingEvent implements Serializable {
     private String materialType;
     private double weight; // kilograms
     private LocalDate date;

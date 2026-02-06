@@ -202,10 +202,9 @@ public class EcoPointsRecyclingTracker {
 
     private static void saveHouseholdsToFile() {
         try {
-            // create a FileOutputStream to write to the file named "households.per"
-            ObjectOutputStream out = new ObjectOutputStream {
-                new FileOutputStream("households.per");
-            }
+            // create a FileOutputStream to write to the file named "households.ser"
+            ObjectOutputStream out = new ObjectOutputStream (new FileOutputStream("households.ser"));
+
             // write the entire households map to the file
             out.writeObject(households);
         } catch (IOException e) {

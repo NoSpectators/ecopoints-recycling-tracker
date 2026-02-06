@@ -41,10 +41,10 @@ public class EcoPointsRecyclingTracker {
                 case "5":
                     generateReports();
                     break;
-//                case "6":
-//                    saveHouseholdsToFile();
-//                    System.out.println("Data saved.");
-//                    break;
+                case "6":
+                    saveHouseholdsToFile();
+                    System.out.println("Data saved.");
+                    break;
                 case "7":
                     System.out.println("Exiting program. Goodbye!");
                     running = false;
@@ -198,6 +198,19 @@ public class EcoPointsRecyclingTracker {
         }
 
         System.out.println("Total Community Recycling Weight: " + totalWeight + " kg");
+    }
+
+    private static void saveHouseholdsToFile() {
+        try {
+            // create a FileOutputStream to write to the file named "households.per"
+            ObjectOutputStream out = new ObjectOutputStream {
+                new FileOutputStream("households.per");
+            }
+            // write the entire households map to the file
+            out.writeObject(households);
+        } catch (IOException e) {
+            System.out.println("Error: saving data: " + e.getMessage());
+        }
     }
 
 }

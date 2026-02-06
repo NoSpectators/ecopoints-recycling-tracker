@@ -38,9 +38,9 @@ public class EcoPointsRecyclingTracker {
                 case "4":
                     displayHouseholdEvents();
                     break;
-//                case "5":
-//                    generateReports();
-//                    break;
+                case "5":
+                    generateReports();
+                    break;
 //                case "6":
 //                    saveHouseholdsToFile();
 //                    System.out.println("Data saved.");
@@ -171,6 +171,33 @@ public class EcoPointsRecyclingTracker {
 
         // print total eco points earned
         System.out.println("Total eco points earned: " + household.getTotalPoints() + " points");
+    }
+
+    private static void generateReports() {
+        if (households.isEmpty()) {
+            System.out.println("No households registered for eco-points program.");
+            return;
+        }
+
+        // find household with hightest points
+        Household top = null;
+        for (Household h : households.values()) {
+            if (top == null || h.getTotalPoints() > top.getTotalPoints()) {
+                top = h;
+            }
+        }
+        System.out.println("\nHousehold with highest eco points: " +
+                           "\nID: " + top.getId() +
+                           "\nName: " + top.getName() +
+                           "\nPoints: " + top.getTotalPoints());
+
+        // calculate total community recycling weight
+        double totalWeight = 0.0;
+        for (Household h : households.values()) {
+            totalWeight += h.getTotalWeight();
+        }
+
+        System.out.println("Total Community Recycling Weight: " + totalWeight + " kg");
     }
 
 }

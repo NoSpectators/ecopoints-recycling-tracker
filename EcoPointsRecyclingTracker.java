@@ -20,7 +20,8 @@ public class EcoPointsRecyclingTracker {
             System.out.println("3. Display Households");
             System.out.println("4. Display Household Recycling Events");
             System.out.println("5. Generate Reports");
-            System.out.println("6. Save and Exit");
+            System.out.println("6. Save to File");
+            System.out.println("7. Exit");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
@@ -37,13 +38,16 @@ public class EcoPointsRecyclingTracker {
                 case "4":
                     displayHouseholdEvents();
                     break;
-                case "5":
-                    generateReports();
-                    break;
-                case "6":
-                    saveHouseholdsToFile();
+//                case "5":
+//                    generateReports();
+//                    break;
+//                case "6":
+//                    saveHouseholdsToFile();
+//                    System.out.println("Data saved.");
+//                    break;
+                case "7":
+                    System.out.println("Exiting program. Goodbye!");
                     running = false;
-                    System.out.println("Data saved. Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid choice. Please select 1 - 6.");
@@ -123,7 +127,50 @@ public class EcoPointsRecyclingTracker {
 
         // show success message
         System.out.println("Recycling event logged! Points earned: " + event.getEcoPoints());
+    }
 
+    private static void displayHouseholds() {
+        // check if households map is empty
+        if (households.isEmpty()) {
+            System.out.println("No households registered.");
+            return; // exit early
+        }
+
+        System.out.println("\nRegistered Households: ");
+        for (Household h : households.values()) {
+            System.out.println(h);
+        }
+    }
+
+    private static void displayHouseholdEvents() {
+        // prompt user for household id
+        System.out.println("Enter household ID: ");
+        String id = scanner.nextLine().trim();
+
+        // look up household in hashmap by id
+        Household household = households.get(id);
+
+        // if not found show error and exit
+        if (household == null) {
+            System.out.println("Error: Household ID not found.");
+            return;
+        }
+
+        // print all recycling events
+        System.out.println("\nRecycling Events for " + household.getName() + ":");
+        if (household.getEvents().isEmpty()) {
+            System.out.println("No events logged.");
+            return;
+        }
+        for (RecyclingEvent e : household.getEvents()) {
+            System.out.println(e); // the stringified version (calls toString())
+        }
+
+        // print total weight recycled by household
+        System.out.println("Total weight recycled: " + household.getTotalWeight() + " kg");
+
+        // print total eco points earned
+        System.out.println("Total eco points earned: " + household.getTotalPoints() + " points");
     }
 
 }

@@ -45,4 +45,12 @@ public class Household implements Serializable {
         return total;
     }
 
+    @Override
+    public String toString() {
+        return "ID: " + this.getId() +
+                ", Name: " + this.getName() +
+                ", Address: " + this.getAddress() +
+                ", Joined: " + this.getJoinDate();
+    }
+
 }

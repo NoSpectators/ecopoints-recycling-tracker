@@ -12,6 +12,7 @@ public class EcoPointsRecyclingTracker {
     private static Map<String, Household> households = new HashMap<>(); // hashmap for households
 
     public static void main(String[] args) {
+        loadHouseholdsFromFile(); // load previously saved household data (serialization) for persistence between runs
         boolean running = true;
         while (running) {
             System.out.println("\n=== Eco-Points Recycling Tracker ===");
@@ -195,6 +196,24 @@ public class EcoPointsRecyclingTracker {
             out.writeObject(households);
         } catch (IOException e) {
             System.out.println("Error: saving data: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked") // suppresses unchecked cast warning when reading the object
+    private static void loadHouseholdsFromFile() {
+        // use a try-with-resources block to automatically close the input stream
+        try (
+                ObjectInputStream in = new ObjectInputStream(new FileInputStream("households.ser"));
+        ){
+            // read the object from the file and cast it back to the correct type
+            households = (Map<String, Household>) in.readObject();
+
+            // confirmation message to let the user know data was loaded
+            System.out.println("Household data loaded.");
+        } catch(FileNotFoundException e) {
+            System.out.println("No saved data found. Starting fresh.");
+        } catch(IOException | ClassNotFoundException e) {
+            System.out.println("Error loading data: " + e.getMessage());
         }
     }
 
